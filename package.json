@@ -30,7 +30,7 @@
     "prettier-plugin-astro": "^0.11.1",
     "simple-git-hooks": "^2.9.0"
   },
-  "packageManager": "pnpm@7.24.3",
+  "packageManager": "pnpm@8.6.12",
   "prettier": {
     "semi": false,
     "singleQuote": true,
