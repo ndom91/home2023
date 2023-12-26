@@ -21,8 +21,7 @@
 </style>
 
 <script is:inline>
-  console.log('LOADING THEMEICON')
-  const theme = (() => {
+  const theme = () => {
     if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
       return localStorage.getItem('theme');
     }
@@ -30,15 +29,15 @@
       return 'dark';
     }
       return 'light';
-  })();
+  }
 
-  if (theme === 'light') {
+  if (theme() === 'light') {
     document.documentElement.classList.remove('dark');
   } else {
     document.documentElement.classList.add('dark');
   }
 
-  window.localStorage.setItem('theme', theme);
+  window.localStorage.setItem('theme', theme());
 
   const handleToggleClick = () => {
     const element = document.documentElement;
@@ -51,7 +50,8 @@
   document.getElementById("themeToggle").addEventListener("click", handleToggleClick);
 
   document.addEventListener('astro:after-swap', () => {
-    if (theme === 'light') {
+    const curTheme = theme()
+    if (curTheme === 'light') {
       document.documentElement.classList.remove('dark');
     } else {
       document.documentElement.classList.add('dark');

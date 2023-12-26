@@ -1,12 +1,10 @@
 ---
 import HeaderLink from '@components/HeaderLink.astro';
 import ThemeIcon from '@components/ThemeIcon.astro';
-import { SITE_TITLE } from '@src/consts';
 ---
 
 <header>
 	<nav class="mx-auto flex h-24 max-w-7xl items-center justify-start px-4">
-		<!-- <h2><a href="/">{SITE_TITLE}</a></h2> -->
 		<div class="*:no-underline *:text-black *:dark:text-white font-humaneThin text-7xl tracking-wide">
 			<HeaderLink href="/">Home</HeaderLink>
 			<HeaderLink href="/blog">Blog</HeaderLink>
@@ -41,7 +39,7 @@ import { SITE_TITLE } from '@src/consts';
 					></path></svg
 				>
 			</a>
-      <ThemeIcon client:load />
+      <ThemeIcon />
 		</div>
 	</nav>
 </header>
