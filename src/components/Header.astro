@@ -1,17 +1,19 @@
 ---
-import HeaderLink from './HeaderLink.astro';
-import { SITE_TITLE } from '../consts';
+import HeaderLink from '@components/HeaderLink.astro';
+import ThemeIcon from '@components/ThemeIcon.astro';
+import { SITE_TITLE } from '@src/consts';
 ---
 
 <header>
-	<nav>
-		<h2><a href="/">{SITE_TITLE}</a></h2>
-		<div class="internal-links">
+	<nav class="mx-auto flex h-24 max-w-7xl items-center justify-start px-4">
+		<!-- <h2><a href="/">{SITE_TITLE}</a></h2> -->
+		<div class="*:no-underline *:text-black *:dark:text-white font-humaneThin text-7xl tracking-wide">
 			<HeaderLink href="/">Home</HeaderLink>
 			<HeaderLink href="/blog">Blog</HeaderLink>
 			<HeaderLink href="/about">About</HeaderLink>
 		</div>
-		<div class="social-links">
+    <hr class="m-12 h-px grow border-0 bg-black dark:bg-white">
+		<div class="*:text-black *:dark:text-white flex gap-2">
 			<a href="https://fosstodon.org/@ndom91" target="_blank">
 				<span class="sr-only">Follow ndom91 on Mastodon</span>
 				<svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32"
@@ -39,47 +41,9 @@ import { SITE_TITLE } from '../consts';
 					></path></svg
 				>
 			</a>
+      <ThemeIcon client:load />
 		</div>
 	</nav>
 </header>
 <style>
-	header {
-		margin: 0;
-		padding: 0 1em;
-		background: white;
-		box-shadow: 0 2px 8px rgba(var(--black), 5%);
-	}
-	h2 {
-		margin: 0;
-		font-size: 1em;
-	}
-
-	h2 a,
-	h2 a.active {
-		text-decoration: none;
-	}
-	nav {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-	}
-	nav a {
-		padding: 1em 0.5em;
-		color: var(--black);
-		border-bottom: 4px solid transparent;
-		text-decoration: none;
-	}
-	nav a.active {
-		text-decoration: none;
-		border-bottom-color: var(--accent);
-	}
-	.social-links,
-	.social-links a {
-		display: flex;
-	}
-	@media (max-width: 720px) {
-		.social-links {
-			display: none;
-		}
-	}
 </style>

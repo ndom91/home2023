@@ -1,0 +1,27 @@
+---
+import BaseHead from '@components/BaseHead.astro';
+import Header from '@components/Header.astro';
+import Footer from '@components/Footer.astro';
+import { ShaderBackground } from '@components/ShaderBackground.jsx'
+import { SITE_TITLE, SITE_DESCRIPTION } from '@src/consts';
+
+import { ViewTransitions } from 'astro:transitions';
+---
+
+<!DOCTYPE html>
+<html lang="en" >
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+    <ViewTransitions />
+	</head>
+	<body class="flex min-h-screen flex-col">
+		<Header title={SITE_TITLE} />
+    <main class="grid h-full grow place-items-center">
+      <slot />
+    </main>
+		<Footer />
+	</body>
+  <div class="absolute left-0 top-0 -z-10 h-screen w-screen overflow-hidden bg-zinc-900 text-gray-50">
+    <ShaderBackground client:only="react" transition:persist />
+  </div>
+</html>

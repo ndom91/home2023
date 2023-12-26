@@ -5,9 +5,6 @@ import react from "@astrojs/react";
 import tailwind from "@astrojs/tailwind";
 
 export default defineConfig({
-  experimental: {
-   viewTransitions: true
-  },
   site: 'https://ndo.dev',
   integrations: [mdx(), sitemap(), react(), tailwind()]
 });
