@@ -1,14 +1,23 @@
 ---
-import type { HTMLAttributes } from 'astro/types';
+import type { HTMLAttributes } from "astro/types"
 
-type Props = HTMLAttributes<'a'>;
+type Props = HTMLAttributes<"a">
 
-const { href, class: className, ...props } = Astro.props;
+const { href, class: className, ...props } = Astro.props
 
-const { pathname } = Astro.url;
-const isActive = href === pathname || href === pathname.replace(/\/$/, '');
+const { pathname } = Astro.url
+const isActive = href === pathname || href === pathname.replace(/\/$/, "")
 ---
 
-<a href={href} class:list={[className, 'rounded-md focus:underline focus:underline-offset-4 focus:outline-none ', { 'font-extrabold': isActive }]} {...props}>
-	<slot />
+<a
+  href={href}
+  data-astro-prefetch
+  class:list={[
+    className,
+    "rounded-md focus:underline focus:underline-offset-4 focus:outline-none ",
+    { "font-extrabold underline underline-offset-4": isActive },
+  ]}
+  {...props}
+>
+  <slot />
 </a>

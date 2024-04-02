@@ -1,26 +1,42 @@
 ---
-import { getCollection } from 'astro:content';
-import FormattedDate from '@components/FormattedDate.astro';
-import Layout from '@layouts/index.astro';
+import { getCollection } from "astro:content"
+import FormattedDate from "@components/FormattedDate.astro"
+import Layout from "@layouts/index.astro"
 
-const posts = (await getCollection('blog')).sort(
-	(a, b) => new Date(b.data.date) - new Date(a.data.date)
-);
+const post = Astro.props
+console.log("POST", post)
+
+const posts = (
+  await getCollection("blog", ({ data }) => {
+    return import.meta.env.PROD ? data.draft !== true : true
+  })
+).sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+
+console.log(posts[0])
+
+const { Content } = await posts[0].render()
 ---
 
 <Layout>
-  <section class="adaptive-glass mx-auto flex max-w-4xl justify-center p-8">
-    <ul>
+  <section class="adaptive-glass rounded-md mx-auto flex max-w-7xl justify-center p-8">
+    <ul class="flex flex-wrap gap-8 list-none">
       {
         posts.map((post) => (
-          <li>
-            <a href={`/blog/${post.slug}/`}>
-              <img width={720} height={360} src={`../${post.data.heroImage}`} alt="" />
-              <h4 class="title dark:text-white">{post.data.title}</h4>
-              <p class="date">
-                <FormattedDate date={post.data.date} />
-              </p>
-            </a>
+          <li class="p-2 rounded-md bg-neutral-900/10 w-[calc(50%_-_1rem)] *:transition first:w-full first:mb-4">
+            <div>
+              <a class="inline-block" href={`/blog/${post.slug}/`}>
+                <img class="w-full rounded-lg" src={`../${post.data.heroImage}`} alt="" />
+              </a>
+              <div class="">
+                <h4 class="dark:text-white text-2xl">{post.data.title}</h4>
+                <FormattedDate class="text-xl dark:text-white/50" date={post.data.date} />
+                {post.slug === posts[0].slug ? (
+                  <div class="line-clamp-[15] mt-4">
+                    <Content />
+                  </div>
+                ) : null}
+              </div>
+            </div>
           </li>
         ))
       }
@@ -29,67 +45,14 @@ const posts = (await getCollection('blog')).sort(
 </Layout>
 
 <style>
-  ul {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2rem;
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-  }
-  ul li {
-    width: calc(50% - 1rem);
-  }
-  ul li * {
-    text-decoration: none;
-    transition: 0.2s ease;
-  }
-  ul li:first-child {
-    width: 100%;
-    margin-bottom: 1rem;
-    text-align: center;
-  }
-  ul li:first-child img {
-    width: 100%;
-  }
-  ul li:first-child .title {
-    font-size: 2.369rem;
-  }
-  ul li img {
-    margin-bottom: 0.5rem;
-    border-radius: 12px;
-  }
-  ul li a {
-    display: block;
-  }
-  .title {
-    margin: 0;
-    line-height: 1;
-  }
-  .date {
-    margin: 0;
-    color: rgb(var(--gray));
-  }
-  ul li a:hover h4,
-  ul li a:hover .date {
-    color: rgb(var(--accent));
-  }
-  ul a:hover img {
-    box-shadow: var(--box-shadow);
-  }
-  @media (max-width: 720px) {
-    ul {
-      gap: 0.5em;
+  li:first-of-type > div {
+    @apply w-full grid grid-cols-3;
+
+    a ~ div {
+      @apply col-span-1 py-4 px-8;
     }
-    ul li {
-      width: 100%;
-      text-align: center;
-    }
-    ul li:first-child {
-      margin-bottom: 0;
-    }
-    ul li:first-child .title {
-      font-size: 1.563em;
+    a:has(img) {
+      @apply col-span-2;
     }
   }
 </style>

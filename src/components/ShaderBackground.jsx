@@ -3,13 +3,13 @@ import * as reactSpring from "@react-spring/three"
 import * as drei from "@react-three/drei"
 import * as fiber from "@react-three/fiber"
 
-export function ShaderBackground(test) {
+export function ShaderBackground() {
   return (
-    <>
+    <div className="absolute top-4 left-4 w-[calc(100%_-_32px)] h-[calc(100%_-_32px)] -z-10">
       <ShaderGradientCanvas
         importedFiber={{ ...fiber, ...drei, ...reactSpring }}
         pointerEvents="none"
-        className="fixed left-0 top-0 z-10 hidden h-screen w-screen dark:block"
+        className="hidden fixed top-0 left-0 z-10 w-screen h-screen dark:block"
       >
         <ShaderGradient
           control="query"
@@ -22,7 +22,7 @@ export function ShaderBackground(test) {
       <ShaderGradientCanvas
         importedFiber={{ ...fiber, ...drei, ...reactSpring }}
         pointerEvents="none"
-        className="fixed left-0 top-0 z-10 block h-screen w-screen dark:hidden"
+        className="block fixed top-0 left-0 z-10 w-screen h-screen dark:hidden"
       >
         <ShaderGradient
           control="query"
@@ -32,6 +32,6 @@ export function ShaderBackground(test) {
           }
         />
       </ShaderGradientCanvas>
-    </>
+    </div>
   )
 }
