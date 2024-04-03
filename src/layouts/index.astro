@@ -16,18 +16,31 @@ import { ViewTransitions } from "astro:transitions"
   </head>
   <body class="min-h-screen overflow-hidden bg-zinc-900">
     <div
-      class="flex flex-col m-4 h-[calc(100vh_-_32px)] w-[calc(100vw_-_16px)] overflow-y-scroll text-gray-50"
+      class="dark:bg-neutral-800/50 bg-neutral-200/30 h-screen absolute top-0 left-0 w-full pointer-events-none"
     >
-      <div class="flex flex-col dark:bg-neutral-800/50 bg-neutral-200/30">
-        <Header title={SITE_TITLE} transition:persist />
-        <main class="flex flex-col items-center min-h-[calc(100vh_-_248px)]">
-          <slot />
-        </main>
-        <Footer />
-      </div>
-      <div class="">
-        <ShaderBackground client:only="react" transition:persist />
+      <ShaderBackground client:only="react" transition:persist />
+    </div>
+    <div class="flex flex-col h-screen w-screen overflow-y-auto">
+      <Header title={SITE_TITLE} transition:persist />
+      <main class="flex flex-col items-center flex-grow">
+        <slot />
+      </main>
+      <Footer />
+      <div
+        class="fixed top-0 left-0 w-full h-full bg-transparent pointer-events-none shadow-[inset_0_-0px_0px_16px_rgba(0,0,0,1)]"
+      >
       </div>
     </div>
+    <script>
+      document.documentElement.classList.add("dark")
+
+      window.localStorage.setItem("theme", "dark")
+    </script>
+
+    <script>
+      document.addEventListener("astro:after-swap", () => {
+        document.documentElement.classList.add("dark")
+      })
+    </script>
   </body>
 </html>

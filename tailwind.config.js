@@ -1,7 +1,7 @@
 import { StaticShadows } from "open-props/src/shadows"
+import typography from "@tailwindcss/typography"
 
-/** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
   darkMode: "class",
   content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
   theme: {
@@ -21,5 +21,5 @@ module.exports = {
       "2xl": StaticShadows["--shadow-6"],
     },
   },
-  plugins: [],
+  plugins: [typography],
 }

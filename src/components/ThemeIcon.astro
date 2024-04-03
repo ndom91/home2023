@@ -48,7 +48,8 @@
     if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
       return "dark"
     }
-    return "light"
+    // Dark default
+    return "dark"
   })() as string
 
   if (theme === "light") {

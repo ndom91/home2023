@@ -27,11 +27,12 @@
     "react-dom": "^18.2.0",
     "shadergradient": "^1.2.9",
     "tailwindcss": "^3.4.3",
-    "three": "^0.163.0"
+    "three": "^0.150.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.2.1",
     "@commitlint/config-conventional": "^19.1.0",
+    "@tailwindcss/typography": "^0.5.12",
     "lint-staged": "^15.2.2",
     "open-props": "^1.7.0",
     "postcss-nesting": "^12.1.1",
