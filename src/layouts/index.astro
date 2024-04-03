@@ -16,20 +16,20 @@ import { ViewTransitions } from "astro:transitions"
   </head>
   <body class="min-h-screen overflow-hidden bg-zinc-900">
     <div
-      class="dark:bg-neutral-800/50 bg-neutral-200/30 h-screen absolute top-0 left-0 w-full pointer-events-none"
+      class="dark:bg-neutral-900/70 bg-neutral-200/10 h-screen absolute top-0 left-0 w-full pointer-events-none"
     >
       <ShaderBackground client:only="react" transition:persist />
     </div>
-    <div class="flex flex-col h-screen w-screen overflow-y-auto">
+    <div class="flex flex-col h-screen w-dvw overflow-y-scroll">
       <Header title={SITE_TITLE} transition:persist />
       <main class="flex flex-col items-center flex-grow">
         <slot />
       </main>
       <Footer />
-      <div
-        class="fixed top-0 left-0 w-full h-full bg-transparent pointer-events-none shadow-[inset_0_-0px_0px_16px_rgba(0,0,0,1)]"
-      >
-      </div>
+    </div>
+    <div
+      class="fixed top-0 left-0 w-full h-full bg-transparent pointer-events-none shadow-[inset_0_-0px_0px_16px_rgba(0,0,0,1)]"
+    >
     </div>
     <script>
       document.documentElement.classList.add("dark")
