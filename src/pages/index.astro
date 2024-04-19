@@ -1,15 +1,15 @@
 ---
 import Layout from "@layouts/index.astro"
+import Logo from "../../public/logo.svg?raw"
 ---
 
 <Layout>
   <div
-    class="relative h-2/3 w-full max-w-7xl bg-neutral-100/20 dark:bg-neutral-700/20 backdrop-blur-2xl"
+    class="relative h-2/3 w-full max-w-7xl"
   >
-    <span
-      class="dark:text-white text-black absolute -left-12 bottom-28 rotate-[270deg] font-humane text-[12rem]"
-    >
-      NDOM91
-    </span>
+    <section class="flex flex-col items-start justify-start text-red-500">
+      <div>.domino</div>
+      <Fragment set:html={Logo}  class="size-48 "/>
+    </section>
   </div>
 </Layout>
